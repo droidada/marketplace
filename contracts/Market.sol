@@ -24,7 +24,7 @@ contract Market is Ownable, IMarket {
 
     constructor(address _admin, uint256 _comissionPercentage) {
         admin = _admin;
-        comissionPercentage = _comissionPercentage;
+        comissionPercentage = 100 / _comissionPercentage;
     }
 
     function list(

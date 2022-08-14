@@ -10,7 +10,6 @@ interface IMarket {
     ) external;
 
     function unlist(uint256) external;
-
     function purchase(uint256) external payable;
 
     event Listed(uint256 indexed itemId, address author, uint256 price);
