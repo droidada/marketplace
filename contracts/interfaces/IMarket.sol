@@ -2,11 +2,18 @@
 pragma solidity ^0.8.15;
 
 interface IMarket {
-    function list(uint, uint, uint, address) external;
-    function unlist(uint) external;
-    function purchase(uint) external payable;
+    function list(
+        uint256,
+        uint256,
+        uint256,
+        address
+    ) external;
 
-    event Listed(uint indexed itemId, address author, uint price);
-    event UnListed(uint indexed itemId, address author);
-    event ItemPurchased(uint indexed itemId, address prevOwner, address newOwner);
+    function unlist(uint256) external;
+
+    function purchase(uint256) external payable;
+
+    event Listed(uint256 indexed itemId, address author, uint256 price);
+    event UnListed(uint256 indexed itemId, address author);
+    event ItemPurchased(uint256 indexed itemId, address prevOwner, address newOwner);
 }

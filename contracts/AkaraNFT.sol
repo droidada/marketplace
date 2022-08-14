@@ -16,9 +16,9 @@ contract AkaraNFT is ERC721URIStorage {
         owner = _marketplace;
     }
 
-    function createToken(string memory _tokenURI) public returns (uint) {
+    function createToken(string memory _tokenURI) public returns (uint256) {
         tokenIds.increment();
-        uint newItemId = tokenIds.current();
+        uint256 newItemId = tokenIds.current();
 
         _mint(msg.sender, newItemId);
         _setTokenURI(newItemId, _tokenURI);

@@ -7,35 +7,34 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./interfaces/IAuction.sol";
 
 contract Auction is IAuction, Ownable {
-
     IERC721 public nft;
-    uint public nftId;
+    uint256 public nftId;
 
-    uint private endAt;
-    uint private durationInDays;
-    uint private highestBid;
+    uint256 private endAt;
+    uint256 private durationInDays;
+    uint256 private highestBid;
 
     bool public started;
     bool public ended;
     address public highestBidder;
     address payable private seller;
 
-    mapping(address => uint) internal bids;
+    mapping(address => uint256) internal bids;
     mapping(address => bool) internal whitelisted;
 
     constructor(
         address _nft,
-        uint _nftId,
-        uint _startingBid,
+        uint256 _nftId,
+        uint256 _startingBid,
         address _seller
     ) {
         nft = IERC721(_nft);
         nftId = _nftId;
-        seller = payable(_seller);//payable(msg.sender);
+        seller = payable(_seller); //payable(msg.sender);
         highestBid = _startingBid;
     }
 
-    function start(uint _durationInDays) external onlyOwner {
+    function start(uint256 _durationInDays) external onlyOwner {
         require(!started, "started");
         require(msg.sender == seller, "not seller");
 
@@ -62,7 +61,7 @@ contract Auction is IAuction, Ownable {
     }
 
     function withdraw() external onlyOwner {
-        uint bal = bids[msg.sender];
+        uint256 bal = bids[msg.sender];
         bids[msg.sender] = 0;
         payable(msg.sender).transfer(bal);
 
