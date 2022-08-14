@@ -1,32 +1,6 @@
-# Hardhat Template [![Github Actions][gha-badge]][gha] [![Hardhat][hardhat-badge]][hardhat] [![License: MIT][license-badge]][license]
-
-[gha]: https://github.com/paulrberg/hardhat-template/actions
-[gha-badge]: https://github.com/paulrberg/hardhat-template/actions/workflows/ci.yml/badge.svg
-[hardhat]: https://hardhat.org/
-[hardhat-badge]: https://img.shields.io/badge/Built%20with-Hardhat-FFDB1C.svg
-[license]: https://opensource.org/licenses/MIT
-[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
-
-A Hardhat-based template for developing Solidity smart contracts, with sensible defaults.
-
-- [Hardhat](https://github.com/nomiclabs/hardhat): compile, run and test smart contracts
-- [TypeChain](https://github.com/ethereum-ts/TypeChain): generate TypeScript bindings for smart contracts
-- [Ethers](https://github.com/ethers-io/ethers.js/): renowned Ethereum library and wallet implementation
-- [Solhint](https://github.com/protofire/solhint): code linter
-- [Solcover](https://github.com/sc-forks/solidity-coverage): code coverage
-- [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code formatter
-
-## Getting Started
-
-Click the [`Use this template`](https://github.com/paulrberg/hardhat-template/generate) button at the top of the page to
-create a new repository with this repo as the initial state.
+# NFT Markplace
 
 ## Features
-
-This template builds upon the frameworks and libraries mentioned above, so for details about their specific features, please consult their respective documentations.
-
-For example, for Hardhat, you can refer to the [Hardhat Tutorial](https://hardhat.org/tutorial) and the [Hardhat
-Docs](https://hardhat.org/docs). You might be in particular interested in reading the [Testing Contracts](https://hardhat.org/tutorial/testing-contracts) section.
 
 ### Sensible Defaults
 
@@ -157,6 +131,3 @@ $ yarn deploy --greeting "Bonjour, le monde!"
 
 If you use VSCode, you can get Solidity syntax highlighting with the [hardhat-solidity](https://marketplace.visualstudio.com/items?itemName=NomicFoundation.hardhat-solidity) extension.
 
-## License
-
-[MIT](./LICENSE.md) © Paul Razvan Berg
