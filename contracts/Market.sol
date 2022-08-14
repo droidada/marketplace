@@ -27,16 +27,6 @@ contract Market is Ownable, IMarket {
         comissionPercentage = _comissionPercentage;
     }
 
-    function addHost(address _host) external onlyOwner {
-        require(itemHosts[_host], "MC: host already added");
-        itemHosts[_host] = true;
-    }
-
-    function removeHost(address _host) external onlyOwner {
-        require(!itemHosts[_host], "MC: host doesn't exist");
-        itemHosts[_host] = false;
-    }
-
     function list(
         uint256 _itemId,
         uint256 _price,
@@ -51,7 +41,7 @@ contract Market is Ownable, IMarket {
 
     function unlist(uint256 _itemId) external {
         require(items[_itemId].listed, "MC: already listed");
-
+        delete(items[_itemId]);
         emit UnListed(_itemId, msg.sender);
     }
 
@@ -75,5 +65,15 @@ contract Market is Ownable, IMarket {
         IERC721(items[_itemId].host).transferFrom(address(this), msg.sender, items[_itemId].id);
 
         emit ItemPurchased(_itemId, prevOwner, msg.sender);
+    }
+
+    function addHost(address _host) external onlyOwner {
+        require(itemHosts[_host], "MC: host already added");
+        itemHosts[_host] = true;
+    }
+
+    function removeHost(address _host) external onlyOwner {
+        require(!itemHosts[_host], "MC: host doesn't exist");
+        delete(itemHosts[_host]);
     }
 }

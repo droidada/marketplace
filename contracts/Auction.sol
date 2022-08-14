@@ -13,11 +13,13 @@ contract Auction is IAuction, Ownable {
     uint256 private endAt;
     uint256 private durationInDays;
     uint256 private highestBid;
+    uint256 private commissionPercentage;
 
     bool public started;
     bool public ended;
     address public highestBidder;
     address payable private seller;
+    address payable private admin;
 
     mapping(address => uint256) internal bids;
     mapping(address => bool) internal whitelisted;
@@ -26,12 +28,15 @@ contract Auction is IAuction, Ownable {
         address _nft,
         uint256 _nftId,
         uint256 _startingBid,
+        uint256 _commissionPercentage,
         address _seller
     ) {
         nft = IERC721(_nft);
         nftId = _nftId;
         seller = payable(_seller); //payable(msg.sender);
         highestBid = _startingBid;
+        commissionPercentage = _commissionPercentage;
+        admin = payable(msg.sender);
     }
 
     function start(uint256 _durationInDays) external onlyOwner {
@@ -60,10 +65,13 @@ contract Auction is IAuction, Ownable {
         emit Bid(msg.sender, msg.value, nftId);
     }
 
-    function withdraw() external onlyOwner {
+    function withdraw() external {
+        require(msg.sender != seller, "AE: unauthorized withdrawal");
         uint256 bal = bids[msg.sender];
         bids[msg.sender] = 0;
-        payable(msg.sender).transfer(bal);
+
+        admin.transfer(bal * commissionPercentage);
+        payable(msg.sender).transfer(bal - (bal * commissionPercentage));
 
         emit Withdraw(msg.sender, bal);
     }
@@ -92,7 +100,7 @@ contract Auction is IAuction, Ownable {
 
     function unWhitelist(address _user) external {
         require(!whitelisted[_user], "MC: not whitelisted");
-        whitelisted[_user] = false;
+        delete(whitelisted[_user]);
         emit UnWhitelisted(_user);
     }
 }
